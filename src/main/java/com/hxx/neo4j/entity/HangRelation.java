@@ -2,8 +2,8 @@ package com.hxx.neo4j.entity;
 
 import org.neo4j.ogm.annotation.*;
 
-@RelationshipEntity(type = "ImageRelation")
-public class ImageRelation {
+@RelationshipEntity(type = "HangRelation")
+public class HangRelation {
     @Id
     @GeneratedValue
     private Long id;
@@ -14,10 +14,10 @@ public class ImageRelation {
     @Property
     private double distance;
 
-    public ImageRelation() {
+    public HangRelation() {
     }
 
-    public ImageRelation(Long id, ImageNode startNode, ImageNode endNode, double distance) {
+    public HangRelation(Long id, ImageNode startNode, ImageNode endNode, double distance) {
         this.id = id;
         this.startNode = startNode;
         this.endNode = endNode;
@@ -58,7 +58,7 @@ public class ImageRelation {
 
     @Override
     public String toString() {
-        return "ImageRelation{" +
+        return "HangRelation{" +
                 "id=" + id +
                 ", startNode=" + startNode +
                 ", endNode=" + endNode +

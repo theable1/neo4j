@@ -3,12 +3,10 @@ package com.hxx.neo4j;
 
 import com.hxx.neo4j.entity.*;
 import com.hxx.neo4j.service.*;
-import com.hxx.neo4j.service.impl.ImageServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -65,11 +63,11 @@ class Neo4jApplicationTests {
     void addIamgeRelation(){
         ImageNode node1 = imageServiceImpl.getImageNodeByFeatureId("123");
         ImageNode node2= imageServiceImpl.getImageNodeByFeatureId("111");
-        ImageRelation imageRelation =new ImageRelation();
-        imageRelation.setStartNode(node1);
-        imageRelation.setEndNode(node2);
-        imageRelation.setDistance(0.7);
-        imageRelationServiceImpl.addImageRelation(imageRelation);
+        HangRelation hangRelation =new HangRelation();
+        hangRelation.setStartNode(node1);
+        hangRelation.setEndNode(node2);
+        hangRelation.setDistance(0.7);
+        imageRelationServiceImpl.addImageRelation(hangRelation);
 
     }
     @Test
