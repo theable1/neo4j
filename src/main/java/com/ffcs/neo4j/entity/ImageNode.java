@@ -1,37 +1,51 @@
-package com.hxx.neo4j.entity;
+package com.ffcs.neo4j.entity;
 
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.NodeEntity;
-import org.neo4j.ogm.annotation.Property;
+import org.neo4j.ogm.annotation.*;
+import org.springframework.util.StringUtils;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity(label = "Image")
 public class ImageNode {
     @Id
     @GeneratedValue
-    private Long nodeId;
+    private Long id;
     @Property
     private String featureId;
     @Property
     private String imageShowPath;
     @Property
     private String imageId;
+    @Property
+    private String saveTime;
+    @Labels
+    private Set<String> labels = new HashSet<>();
 
-    public ImageNode() {
+    public void addLabel(String label) {
+        if (!StringUtils.isEmpty(label)) {
+            this.labels.add(label);
+        }
     }
 
-    public ImageNode(Long nodeId, String featureId, String imageShowPath, String imageId) {
-        this.nodeId = nodeId;
-        this.featureId = featureId;
-        this.imageShowPath = imageShowPath;
-        this.imageId = imageId;
-    }
-    public Long getNodeId() {
-        return nodeId;
+    public String getSaveTime() {
+        return saveTime;
     }
 
-    public void setNodeId(Long nodeId) {
-        this.nodeId = nodeId;
+    public void setSaveTime(String saveTime) {
+        this.saveTime = saveTime;
+    }
+
+    public void setLabels(Set<String> labels) {
+        this.labels = labels;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFeatureId() {
@@ -58,15 +72,19 @@ public class ImageNode {
         this.imageId = imageId;
     }
 
-
+    public Set<String> getLabels() {
+        return labels;
+    }
 
     @Override
     public String toString() {
         return "ImageNode{" +
-                "nodeId=" + nodeId +
+                "id=" + id +
                 ", featureId='" + featureId + '\'' +
                 ", imageShowPath='" + imageShowPath + '\'' +
                 ", imageId='" + imageId + '\'' +
+                ", saveTime='" + saveTime + '\'' +
+                ", labels=" + labels +
                 '}';
     }
 }
