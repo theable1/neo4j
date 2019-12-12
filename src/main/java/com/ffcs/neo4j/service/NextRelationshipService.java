@@ -8,15 +8,5 @@ public interface NextRelationshipService {
 
     //DELETE
     void deleteAll();
-    void deleteNextRelationshipByFeatureId(String featureId);
-
-    //UPDATE
-    NextRelationship updateNextRelationshipByFeatureId(String featureId,String imageId,String imageShowPath);
-    NextRelationship updateImageIdByFeatureId(String featureId,String imageId);
-    NextRelationship updateImageShowPathByFeatureId(String featureId,String imageShowPath);
-
-    //SELECT
-    Iterable<NextRelationship> findAll();
-
-    boolean isExist(NextRelationship nextRelationship);
+    void delete(NextRelationship nextRelationship);
 }

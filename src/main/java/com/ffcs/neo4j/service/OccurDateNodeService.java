@@ -14,7 +14,7 @@ public interface OccurDateNodeService {
     /**
      * @param occurDateNode
      */
-    void add(OccurDateNode occurDateNode);
+    void add(PersonNode personNode,OccurDateNode occurDateNode);
 
     /**
      * 删除所有label=OccurDate的节点

@@ -3,6 +3,7 @@ package com.ffcs.neo4j;
 
 import com.ffcs.neo4j.entity.HangRelationship;
 //import com.ffcs.neo4j.entity.ImageNode;
+import com.ffcs.neo4j.entity.NextRelationship;
 import com.ffcs.neo4j.entity.OccurDateNode;
 import com.ffcs.neo4j.entity.PersonNode;
 import com.ffcs.neo4j.service.*;
@@ -16,12 +17,12 @@ import java.util.Random;
 
 @SpringBootTest
 class Neo4jApplicationTests {
-//    @Autowired
+    //    @Autowired
 //    ImageNodeService imageNodeServiceImpl;
     @Autowired
     OccurDateNodeService occurDateNodeService;
-    @Autowired
-    PersonNodeService personNodeService;
+    //    @Autowired
+//    PersonNodeService personNodeService;
     @Autowired
     HangRelationshipService hangRelationshipService;
     @Autowired
@@ -93,18 +94,85 @@ class Neo4jApplicationTests {
 //    }
 
     @Test
-    void addLatestDate(){
-        OccurDateNode occurDateNode = new OccurDateNode();
-        occurDateNode.setDate("2019-12-11");
-        occurDateNodeService.add(occurDateNode);
-    }
-
-    @Test
-    void getLatestDateTest(){
+    void getLatestDateTest() {
         PersonNode personNode = new PersonNode();
         personNode.setFeatureId(1);
         OccurDateNode node = occurDateNodeService.getLatestOccurDateNodeByPersonNode(personNode);
         System.out.println(node);
     }
+
+    @Test
+    void getPreviousAndNextDateTest() {
+        PersonNode personNode = new PersonNode();
+        personNode.setFeatureId(1);
+        OccurDateNode node = occurDateNodeService.getLatestOccurDateNodeByPersonNode(personNode);
+        OccurDateNode previousOccurDateNode = occurDateNodeService.getPreviousOccurDateNode(node);
+        System.out.println(node.getDate() + "的前一个时间节点" + previousOccurDateNode.getDate());
+        OccurDateNode nextOccurDateNode = occurDateNodeService.getNextOccurDateNode(previousOccurDateNode);
+        System.out.println(previousOccurDateNode.getDate() + "的后一个时间节点" + nextOccurDateNode.getDate());
+    }
+
+    @Test
+    void getDateListTest() {
+        PersonNode personNode = new PersonNode();
+        personNode.setFeatureId(1);
+        List<OccurDateNode> list = occurDateNodeService.getOccurDateListByPersonNode(personNode);
+        for (OccurDateNode occurDateNode : list) {
+            System.out.println(occurDateNode);
+        }
+    }
+
+    @Test
+    void dateNodeIsExistTest() {
+        PersonNode personNode = new PersonNode();
+        personNode.setFeatureId(1);
+        OccurDateNode occurDateNode = new OccurDateNode();
+        occurDateNode.setDate("2019");
+        List<OccurDateNode> list = occurDateNodeService.getOccurDateListByPersonNode(personNode);
+        for (OccurDateNode node : list) {
+            System.out.println(node);
+        }
+    }
+
+    @Test
+    void addLatestDate() {
+        PersonNode personNode = new PersonNode();
+        personNode.setFeatureId(1);
+        OccurDateNode occurDateNode = new OccurDateNode();
+        occurDateNode.setDate("2019-12-11");
+        occurDateNodeService.add(personNode,occurDateNode);
+        occurDateNode.setDate("2019-12-01");
+        occurDateNodeService.add(personNode,occurDateNode);
+        occurDateNode.setDate("2019-12-13");
+        occurDateNodeService.add(personNode,occurDateNode);
+        occurDateNode.setDate("2019-12-05");
+        occurDateNodeService.add(personNode,occurDateNode);
+    }
+
+    @Test
+    void deleteRelationTest() {
+        PersonNode personNode = new PersonNode();
+        personNode.setFeatureId(1);
+        OccurDateNode start = null;
+        OccurDateNode end = null;
+        List<OccurDateNode> list = occurDateNodeService.getOccurDateListByPersonNode(personNode);
+        for (OccurDateNode occurDateNode : list) {
+            if (occurDateNode.getDate().equals("2019-12-12")){
+                end = occurDateNode;
+            }
+            if (occurDateNode.getDate().equals("2019-12-11")){
+                start = occurDateNode;
+            }
+        }
+        System.out.println("end:"+end);
+        System.out.println("start:"+start);
+        NextRelationship nextRelationship = new NextRelationship();
+        nextRelationship.setStartDateNode(start);
+        nextRelationship.setEndDateNode(end);
+        nextRelationshipService.delete(nextRelationship);
+    }
+
+
+
 
 }
