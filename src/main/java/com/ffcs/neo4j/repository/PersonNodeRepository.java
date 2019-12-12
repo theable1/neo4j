@@ -7,6 +7,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 
 public interface PersonNodeRepository extends Neo4jRepository<PersonNode, Long> {
-    @Query("MATCH (n:Person{id:{id}}) SET n.featureId={featureId} RETURN n")
-    ImageNode updatePersonFeatureIdById(@Param("id") String id, @Param("featureId") String featureId);
+
+
 }
