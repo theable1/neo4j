@@ -19,7 +19,7 @@ public interface PersonNodeService {
 
     //SELECT
     Iterable<PersonNode> findAll();
-    PersonNode findPersonNodeByImageNode(String featureId);
+    PersonNode findPersonNodeByImageNode(Long featureId);
 
 
     boolean isExist(PersonNode personNode);

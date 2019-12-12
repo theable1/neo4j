@@ -10,5 +10,5 @@ public interface PersonNodeRepository extends Neo4jRepository<PersonNode, Long> 
 //    ImageNode updatePersonFeatureIdById(@Param("id") String id, @Param("featureId") String featureId);
     //search  通过featureId查找到Person节点
     @Query("match (i:Image{featureId:{featureId}}),(i)-[*..100]-(p:Person) return p")
-    PersonNode findPersonNodeByImageNode(@Param("featureId") String featureId);
+    PersonNode findPersonNodeByImageNode(@Param("featureId") Long featureId);
 }
