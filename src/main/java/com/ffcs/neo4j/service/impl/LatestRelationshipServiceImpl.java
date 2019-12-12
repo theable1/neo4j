@@ -1,6 +1,7 @@
 package com.ffcs.neo4j.service.impl;
 
 import com.ffcs.neo4j.entity.LatestRelationship;
+import com.ffcs.neo4j.entity.PersonNode;
 import com.ffcs.neo4j.repository.LatestRelationshipRepository;
 import com.ffcs.neo4j.service.LatestRelationshipService;
 import org.springframework.beans.factory.annotation.Autowired;

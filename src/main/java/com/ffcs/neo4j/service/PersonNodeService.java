@@ -1,6 +1,5 @@
 package com.ffcs.neo4j.service;
 
-import com.ffcs.neo4j.entity.ImageNode;
 import com.ffcs.neo4j.entity.PersonNode;
 
 import java.util.List;
