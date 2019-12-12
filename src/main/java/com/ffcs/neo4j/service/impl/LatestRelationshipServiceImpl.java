@@ -23,6 +23,6 @@ public class LatestRelationshipServiceImpl implements LatestRelationshipService 
 
     @Override
     public void deleteLatestRelationship(LatestRelationship latestRelationship) {
-        latestRelationshipRepository.delete(latestRelationship);
+        latestRelationshipRepository.deleteLatestRelationship(latestRelationship.getOccurDateNode().getId(),latestRelationship.getPersonNode().getId());
     }
 }

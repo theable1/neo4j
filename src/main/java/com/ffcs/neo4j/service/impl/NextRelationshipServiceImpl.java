@@ -22,8 +22,9 @@ public class NextRelationshipServiceImpl implements NextRelationshipService {
     }
 
     @Override
-    public void delete(NextRelationship nextRelationship) {
-        nextRelationshipRepository.delete(nextRelationship);
+    public void deleteNextRelationship(NextRelationship nextRelationship) {
+        nextRelationshipRepository.deleteNextRelationship(nextRelationship.getStartDateNode().getId(),nextRelationship.getEndDateNode().getId());
     }
+
 
 }
