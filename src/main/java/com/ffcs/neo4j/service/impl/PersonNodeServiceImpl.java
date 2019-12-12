@@ -21,7 +21,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     @Override
     //CREATE
     public void add(PersonNode personNode) {
-        if (isExist(personNode)) {
+        if (!this.isExist(personNode)) {
             personNodeRepository.save(personNode);
             System.out.println("添加Person节点成功！");
         } else {
@@ -114,7 +114,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     public boolean isExist(PersonNode personNode) {
         Iterable<PersonNode> personNodeList = personNodeRepository.findAll();
         for (PersonNode p : personNodeList) {
-            if (p.getFeatureId() == personNode.getFeatureId()) {
+            if (p.getFeatureId().equals(personNode.getFeatureId()) ) {
                 return true;
             }
         }

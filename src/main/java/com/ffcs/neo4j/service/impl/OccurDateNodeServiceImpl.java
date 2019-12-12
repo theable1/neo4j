@@ -32,7 +32,7 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
     @Override
     public void add(PersonNode person, OccurDateNode occurDateNode) {
         //防止person节点id为null，无法删除相关关系
-        PersonNode personNode = personNodeRepository.findPersonNodeByImageNode(person.getFeatureId());
+        PersonNode personNode = personNodeRepository.findPersonNodeByFeatureId(person.getFeatureId());
         if (!this.isExist(personNode, occurDateNode)) {
             //新添日期节点不存在，可添加
             OccurDateNode dateNode = occurDateNodeRepository.save(occurDateNode);

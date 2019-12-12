@@ -32,7 +32,7 @@ public class PersonNode {
         this.id = id;
     }
 
-    public long getFeatureId() {
+    public Long getFeatureId() {
         return featureId;
     }
 
