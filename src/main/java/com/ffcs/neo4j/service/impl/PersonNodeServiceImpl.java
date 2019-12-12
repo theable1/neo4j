@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PersonNodeServiceImp implements PersonNodeService {
+public class PersonNodeServiceImpl implements PersonNodeService {
     @Autowired
     PersonNodeRepository personNodeRepository;
     @Autowired
@@ -58,8 +58,8 @@ public class PersonNodeServiceImp implements PersonNodeService {
     }
 
     @Override
-    public PersonNode findPersonNodeByImageNode(String featureId) {
-        ImageNode imageNode = imageNodeServiceImpl.getImageNodeByFeatureId(featureId);
+    public PersonNode findPersonNodeByImageNode(Long featureId) {
+        ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(featureId);
         if(imageNode!=null){
             PersonNode personNode= personNodeRepository.findPersonNodeByImageNode(featureId);
             return personNode;
