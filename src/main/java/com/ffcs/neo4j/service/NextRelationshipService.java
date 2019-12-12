@@ -8,5 +8,5 @@ public interface NextRelationshipService {
 
     //DELETE
     void deleteAll();
-    void delete(NextRelationship nextRelationship);
+    void deleteNextRelationship(NextRelationship nextRelationship);
 }
