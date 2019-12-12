@@ -1,6 +1,5 @@
 package com.ffcs.neo4j.service.impl;
 
-import com.ffcs.neo4j.entity.ImageNode;
 import com.ffcs.neo4j.entity.PersonNode;
 //import com.ffcs.neo4j.repository.ImageNodeRepository;
 import com.ffcs.neo4j.repository.PersonNodeRepository;
