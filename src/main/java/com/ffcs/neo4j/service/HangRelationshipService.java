@@ -10,15 +10,7 @@ public interface HangRelationshipService {
 
     //DELETE
     void deleteAll();
-    void deleteHangRelationshipByFeatureId(String featureId);
+    void deleteHangRelationship(HangRelationship hangRelationship);
 
-    //UPDATE
-    HangRelationship updateHangRelationshipByFeatureId(String featureId,String imageId,String imageShowPath);
-    HangRelationship updateImageIdByFeatureId(String featureId,String imageId);
-    HangRelationship updateImageShowPathByFeatureId(String featureId,String imageShowPath);
 
-    //SELECT
-    Iterable<HangRelationship> findAll();
-
-    boolean isExist(HangRelationship hangRelationship);
 }

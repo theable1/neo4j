@@ -8,15 +8,7 @@ public interface LatestRelationshipService {
 
     //DELETE
     void deleteAll();
-    void deleteLatestRelationshipByFeatureId(String featureId);
+    void deleteLatestRelationship(LatestRelationship latestRelationship);
 
-    //UPDATE
-    LatestRelationship updateLatestRelationshipByFeatureId(String featureId,String imageId,String imageShowPath);
-    LatestRelationship updateImageIdByFeatureId(String featureId,String imageId);
-    LatestRelationship updateImageShowPathByFeatureId(String featureId,String imageShowPath);
 
-    //SELECT
-    Iterable<LatestRelationship> findAll();
-
-    boolean isExist(LatestRelationship latestRelationship);
 }

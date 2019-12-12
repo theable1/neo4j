@@ -35,7 +35,7 @@ class Neo4jApplicationTests {
     @Test
     void addIamgeNodes() {
         List<ImageNode> imageNodeList = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 2; i++) {
             Random random = new Random();
             int num = random.nextInt(100);
             ImageNode imageNode = new ImageNode();
@@ -71,12 +71,12 @@ class Neo4jApplicationTests {
         System.out.println(isexist);
     }
 
-    @Test
-    void dateImageNode() {
-        System.out.println(imageNodeServiceImpl.updateImageNodeByFeatureId("260", "111", "xxx111.jpg"));
-        System.out.println(imageNodeServiceImpl.updateImageIdByFeatureId("260", "222"));
-        System.out.println(imageNodeServiceImpl.updateImageShowPathByFeatureId("260", "xxx222.jpg"));
-    }
+//    @Test
+//    void dateImageNode() {
+//        System.out.println(imageNodeServiceImpl.updateImageNodeByFeatureId("260", "111", "xxx111.jpg"));
+//        System.out.println(imageNodeServiceImpl.updateImageIdByFeatureId("260", "222"));
+//        System.out.println(imageNodeServiceImpl.updateImageShowPathByFeatureId("260", "xxx222.jpg"));
+//    }
 
     @Test
     void dateIsExistTest(){

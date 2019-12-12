@@ -7,7 +7,6 @@ public class HangRelationship {
     @Id
     @GeneratedValue
     private Long id;
-
     @EndNode
     private OccurDateNode occurDateNode;
 

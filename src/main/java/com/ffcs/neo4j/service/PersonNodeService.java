@@ -1,6 +1,5 @@
 package com.ffcs.neo4j.service;
 
-import com.ffcs.neo4j.entity.OccurDateNode;
 import com.ffcs.neo4j.entity.PersonNode;
 
 import java.util.List;
@@ -8,6 +7,8 @@ import java.util.List;
 public interface PersonNodeService {
     //CREATE
     void add(PersonNode personNode);
+    void addPersonNodeList(List<PersonNode> personNodeList);
+    PersonNode getPersonNodeByFeatureId(String featureId);
 
     //DELETE
     void deleteAll();
@@ -18,6 +19,8 @@ public interface PersonNodeService {
 
     //SELECT
     Iterable<PersonNode> findAll();
-    PersonNode getPersonNodeByFeatureId(String featureId);
+    PersonNode findPersonNodeByImageNode(String featureId);
 
+
+    boolean isExist(PersonNode personNode);
 }
