@@ -1,6 +1,7 @@
 package com.ffcs.neo4j.service;
 
 //import com.ffcs.neo4j.entity.ImageNode;
+import com.ffcs.neo4j.entity.ImageNode;
 import com.ffcs.neo4j.entity.OccurDateNode;
 import com.ffcs.neo4j.entity.PersonNode;
 
@@ -14,7 +15,7 @@ public interface OccurDateNodeService {
     /**
      * @param occurDateNode
      */
-    void add(PersonNode personNode,OccurDateNode occurDateNode);
+    OccurDateNode add(PersonNode personNode,OccurDateNode occurDateNode);
 
     /**
      * 删除所有label=OccurDate的节点
@@ -35,18 +36,12 @@ public interface OccurDateNodeService {
     OccurDateNode getLatestOccurDateNodeByPersonNode(PersonNode personNode);
 
     /**
-     * 通过ImageNode得到最新日期节点
-     * @param imageNode
-     * @return OccurDateNode
+     * 获取某个Person的某个时间节点
+     * @param personNode
+     * @param date yyyy-MM-dd
+     * @return
      */
-//    OccurDateNode getLatestOccurDateNodeByImageNode(ImageNode imageNode);
-
-    /**
-     * 通过ImageNode得到相连的日期节点
-     * @param imageNode
-     * @return OccurDateNode
-     */
-//    OccurDateNode getOccurDateNodeByImageNode(ImageNode imageNode);
+    OccurDateNode getOccurDateNodeByPersonNode(PersonNode personNode,String date);
 
     /**
      * 获取下一个日期节点
