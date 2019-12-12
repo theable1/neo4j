@@ -1,6 +1,6 @@
 package com.ffcs.neo4j.service;
 
-import com.ffcs.neo4j.entity.ImageNode;
+//import com.ffcs.neo4j.entity.ImageNode;
 import com.ffcs.neo4j.entity.OccurDateNode;
 import com.ffcs.neo4j.entity.PersonNode;
 
@@ -39,14 +39,14 @@ public interface OccurDateNodeService {
      * @param imageNode
      * @return OccurDateNode
      */
-    OccurDateNode getLatestOccurDateNodeByImageNode(ImageNode imageNode);
+//    OccurDateNode getLatestOccurDateNodeByImageNode(ImageNode imageNode);
 
     /**
      * 通过ImageNode得到相连的日期节点
      * @param imageNode
      * @return OccurDateNode
      */
-    OccurDateNode getOccurDateNodeByImageNode(ImageNode imageNode);
+//    OccurDateNode getOccurDateNodeByImageNode(ImageNode imageNode);
 
     /**
      * 获取下一个日期节点
@@ -58,7 +58,7 @@ public interface OccurDateNodeService {
     /**
      * 获取上一个日期节点
      * @param occurDateNode
-     * @return OccurDateNode
+     * @retur n OccurDateNode
      */
     OccurDateNode getPreviousOccurDateNode(OccurDateNode occurDateNode);
 
@@ -69,5 +69,11 @@ public interface OccurDateNodeService {
      */
     List<OccurDateNode> getOccurDateListByPersonNode(PersonNode personNode);
 
-    boolean isExist(OccurDateNode occurDateNode);
+    /**
+     * 判断某个person节点下的某个日期节点是否存在
+     * @param personNode
+     * @param occurDateNode
+     * @return boolean
+     */
+    boolean isExist(PersonNode personNode,OccurDateNode occurDateNode);
 }
