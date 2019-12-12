@@ -122,7 +122,7 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
 
     @Override
     public void deleteAll() {
-
+        occurDateNodeRepository.deleteAll();
     }
 
     @Override
@@ -162,11 +162,13 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
     public List<OccurDateNode> getOccurDateListByPersonNode(PersonNode personNode) {
         OccurDateNode latestDate = this.getLatestOccurDateNodeByPersonNode(personNode);
         List<OccurDateNode> list = new ArrayList<>();
-        list.add(latestDate);
-        OccurDateNode previousOccurDateNode = this.getPreviousOccurDateNode(latestDate);
-        while (previousOccurDateNode != null) {
-            list.add(previousOccurDateNode);
-            previousOccurDateNode = this.getPreviousOccurDateNode(previousOccurDateNode);
+        if (latestDate!=null){
+            list.add(latestDate);
+            OccurDateNode previousOccurDateNode = this.getPreviousOccurDateNode(latestDate);
+            while (previousOccurDateNode != null) {
+                list.add(previousOccurDateNode);
+                previousOccurDateNode = this.getPreviousOccurDateNode(previousOccurDateNode);
+            }
         }
         return list;
     }
