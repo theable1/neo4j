@@ -85,6 +85,9 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     @Override
     public ImageNode findImageNodeByFeatureId(long featureId) {
         ImageNode imageNode = imageNodeRepository.findImageNodeByFeatureId(featureId);
+        if(imageNode==null){
+            System.out.println("该图片节点不存在");
+        }
         return imageNode;
     }
 

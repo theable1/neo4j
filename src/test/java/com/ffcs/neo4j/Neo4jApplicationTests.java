@@ -27,10 +27,10 @@ class Neo4jApplicationTests {
             Random random = new Random();
             int num = random.nextInt(100);
             ImageNode imageNode = new ImageNode();
-            imageNode.setFeatureId(String.valueOf(num));
+            imageNode.setFeatureId(Long.valueOf(num));
             imageNodeList.add(imageNode);
         }
-        imageNodeServiceImpl.addImageNodeList(imageNodeList);
+        imageNodeServiceImpl.addList(imageNodeList);
     }
 
     @Test
@@ -39,8 +39,9 @@ class Neo4jApplicationTests {
     }
 
     @Test
-    void getImageNodeByFeatureId() {
-        imageNodeServiceImpl.getImageNodeByFeatureId("123");
+    void findImageNodeByFeatureId() {
+        ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(55);
+        System.out.println(imageNode);
     }
 
     @Test
@@ -52,19 +53,21 @@ class Neo4jApplicationTests {
     @Test
     void isExist() {
         ImageNode imageNode = new ImageNode();
-        imageNode.setFeatureId("111");
-        imageNode.setImageShowPath("xxx123.jpg");
+        imageNode.setFeatureId(Long.valueOf(500));
+        imageNode.setImageUrl("xxx123.jpg");
         imageNode.setImageId("123");
         boolean isexist = imageNodeServiceImpl.isExist(imageNode);
         System.out.println(isexist);
     }
 
-//    @Test
-//    void dateImageNode() {
-//        System.out.println(imageNodeServiceImpl.updateImageNodeByFeatureId("260", "111", "xxx111.jpg"));
-//        System.out.println(imageNodeServiceImpl.updateImageIdByFeatureId("260", "222"));
-//        System.out.println(imageNodeServiceImpl.updateImageShowPathByFeatureId("260", "xxx222.jpg"));
-//    }
+    @Test
+    void dateImageNode() {
+//        System.out.println(imageNodeServiceImpl.updateImageNode(50, "222", "xxx222.jpg","2019-12-11"));
+//        System.out.println(imageNodeServiceImpl.updateImageIdByFeatureId(50, "333"));
+//        System.out.println(imageNodeServiceImpl.updateImageUrlByFeatureId(50, "333.jpg"));
+        System.out.println(imageNodeServiceImpl.updateSaveTimeByFeatureId(50,"2019-12-12"));
+    }
+
 
 
 

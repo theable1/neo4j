@@ -8,19 +8,25 @@ import java.util.List;
 public interface PersonNodeService {
     //CREATE
     void add(PersonNode personNode);
+
     void addPersonNodeList(List<PersonNode> personNodeList);
-    PersonNode getPersonNodeByFeatureId(String featureId);
 
     //DELETE
     void deleteAll();
-    void deletePersonNodeByFeatureId(String featureId);
+
+    void deletePerson(PersonNode personNode);
 
     //UPDATE
-    PersonNode updatePersonNodeByFeatureId(String featureId);
+    PersonNode updatePersonNode(long featureId, long newFeatureId, String name);
+
+    PersonNode updateFeatureIdByFeatureId(long featureId, long newFeatureId);
+
+    PersonNode updateNameByFeatureId(long featureId, String name);
 
     //SELECT
     Iterable<PersonNode> findAll();
-    PersonNode findPersonNodeByImageNode(Long featureId);
+    PersonNode findPersonNodeByFeatureId(long featureId);
+    PersonNode findPersonNodeByImageFeatureId(long featureId);
 
 
     boolean isExist(PersonNode personNode);
