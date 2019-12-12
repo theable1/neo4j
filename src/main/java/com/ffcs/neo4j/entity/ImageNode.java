@@ -8,16 +8,14 @@ public class ImageNode {
     @GeneratedValue
     private Long id;
     @Property
-    private Long featureId;
+    private long featureId;
+    @Property
+    private String imageId;
     @Property
     private String imageUrl;
     @Property
     private String saveTime;
-    @Property
-    private String imageId;
 
-    @Relationship(type = "HANG")
-    private OccurDateNode date;
     public ImageNode() {
 
     }
@@ -62,23 +60,14 @@ public class ImageNode {
         this.imageId = imageId;
     }
 
-    public OccurDateNode getDate() {
-        return date;
-    }
-
-    public void setDate(OccurDateNode date) {
-        this.date = date;
-    }
-
     @Override
     public String toString() {
         return "ImageNode{" +
                 "id=" + id +
                 ", featureId=" + featureId +
+                ", imageId='" + imageId + '\'' +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", saveTime='" + saveTime + '\'' +
-                ", imageId='" + imageId + '\'' +
-                ", date=" + date +
                 '}';
     }
 }
