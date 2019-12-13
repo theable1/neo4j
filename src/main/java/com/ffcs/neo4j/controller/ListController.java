@@ -95,7 +95,7 @@ public class ListController {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                if(date.before(searchVO.getEndTime()) && date.after(searchVO.getStartTime())){
+                if((date.before(searchVO.getEndTime()) && date.after(searchVO.getStartTime())) || date.equals(searchVO.getStartTime()) || date.equals(searchVO.getEndTime()) ){
                     Map<String,Object> map = new HashMap<>();
                     map.put("date",occurDateNode.getDate());
                     List<ImageNode> imageNodeList = imageNodeServiceImpl.findAllByOccurDate(occurDateNode.getId());
