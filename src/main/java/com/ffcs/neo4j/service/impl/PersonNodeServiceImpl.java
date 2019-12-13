@@ -8,6 +8,8 @@ import com.ffcs.neo4j.service.ImageNodeService;
 import com.ffcs.neo4j.service.PersonNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,8 +21,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     ImageNodeService imageNodeServiceImpl;
 
     @Override
-    //CREATE
-    //
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public PersonNode add(PersonNode personNode) {
         if (personNode.getFeatureId() == null) {
             System.out.println("featureId不为空，添加失败！");
@@ -37,6 +38,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public void addPersonNodeList(List<PersonNode> personNodeList) {
         for (PersonNode p : personNodeList) {
             if (isExist(p)) {
@@ -50,19 +52,20 @@ public class PersonNodeServiceImpl implements PersonNodeService {
 
     //DELETE
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public void deleteAll() {
         personNodeRepository.deleteAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public void deletePerson(PersonNode personNode) {
         personNodeRepository.delete(personNode);
     }
 
     //UPDATE
-
-
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public PersonNode updatePersonNode(Long featureId, Long newFeatureId, String name) {
         PersonNode personNode = findPersonNodeByFeatureId(newFeatureId);
         if (personNode == null) {
@@ -74,6 +77,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public PersonNode updateFeatureIdByFeatureId(Long featureId, Long newFeatureId) {
         PersonNode personNode = findPersonNodeByFeatureId(newFeatureId);
         if (personNode == null) {
@@ -85,18 +89,21 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public PersonNode updateNameByFeatureId(Long featureId, String name) {
         return personNodeRepository.updateNameByFeatureId(featureId, name);
     }
 
     //SEARCH
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public Iterable<PersonNode> findAll() {
 
         return personNodeRepository.findAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public PersonNode findPersonNodeByFeatureId(Long featureId) {
         PersonNode personNode = personNodeRepository.findPersonNodeByFeatureId(featureId);
         if (personNode == null) {
@@ -106,6 +113,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public PersonNode findPersonNodeByImageFeatureId(Long featureId) {
         ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(featureId);
         if (imageNode != null) {
@@ -118,6 +126,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public boolean isExist(PersonNode personNode) {
         Iterable<PersonNode> personNodeList = personNodeRepository.findAll();
         for (PersonNode p : personNodeList) {
