@@ -13,13 +13,6 @@ $(document).ready(function () {
         similarFeatureId: 5453
     };
 
-    var imageVO = {
-        featureId: 49879,
-        occurDate: "2019-12-13",
-        similarFeatureId: 5453,
-        imageUrl: "http://localhost:8080/img/person.jpg"
-    }
-
     $.ajax({
         type: 'post',
         dataType: 'json',
