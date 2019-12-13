@@ -13,6 +13,14 @@ public class HangRelationship {
     @StartNode
     private ImageNode imageNode;
 
+    public HangRelationship() {
+    }
+
+    public HangRelationship(OccurDateNode occurDateNode, ImageNode imageNode) {
+        this.occurDateNode = occurDateNode;
+        this.imageNode = imageNode;
+    }
+
     public Long getId() {
         return id;
     }

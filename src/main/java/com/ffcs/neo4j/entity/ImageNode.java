@@ -20,6 +20,13 @@ public class ImageNode {
 
     }
 
+    public ImageNode(Long featureId, String imageId, String imageUrl, String saveTime) {
+        this.featureId = featureId;
+        this.imageId = imageId;
+        this.imageUrl = imageUrl;
+        this.saveTime = saveTime;
+    }
+
     public Long getId() {
         return id;
     }

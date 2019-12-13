@@ -90,6 +90,13 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     }
 
     //SEARCH
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
+    @Override
+    public List<ImageNode> findAllByOccurDate(Long id) {
+        List<ImageNode> imageNodeList = imageNodeRepository.findAllByOccurDate(id);
+        return imageNodeList;
+    }
+
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public Iterable<ImageNode> findAll() {

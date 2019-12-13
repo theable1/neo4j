@@ -24,6 +24,7 @@ public interface ImageNodeService {
 
     ImageNode updateSaveTimeByFeatureId(Long featureId, String saveTime);
     //SEARCH
+    List<ImageNode> findAllByOccurDate(Long id);
     ImageNode findImageNodeByFeatureId(Long featureId);
     Iterable<ImageNode> findAll();
     Boolean isExist(ImageNode imageNode);

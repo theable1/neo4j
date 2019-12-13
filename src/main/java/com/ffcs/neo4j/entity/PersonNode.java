@@ -24,6 +24,14 @@ public class PersonNode {
         }
     }
 
+    public PersonNode() {
+    }
+
+    public PersonNode(Long featureId, String name) {
+        this.featureId = featureId;
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }

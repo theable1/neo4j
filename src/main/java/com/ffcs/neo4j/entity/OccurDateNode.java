@@ -24,6 +24,13 @@ public class OccurDateNode {
         }
     }
 
+    public OccurDateNode() {
+    }
+
+    public OccurDateNode(String date) {
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }
