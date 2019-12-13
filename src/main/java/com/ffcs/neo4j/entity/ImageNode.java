@@ -8,7 +8,7 @@ public class ImageNode {
     @GeneratedValue
     private Long id;
     @Property
-    private long featureId;
+    private Long featureId;
     @Property
     private String imageId;
     @Property

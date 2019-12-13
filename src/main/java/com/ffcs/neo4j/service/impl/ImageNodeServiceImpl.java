@@ -16,13 +16,18 @@ public class ImageNodeServiceImpl implements ImageNodeService {
 
     //CREATE
     @Override
-    public void add(ImageNode imageNode) {
-        boolean isExist = isExist(imageNode);
-        if(isExist==false){
-            imageNodeRepository.save(imageNode);
-            System.out.println("添加成功！");
-        }else {
-            System.out.println("此图片节点已存在！添加失败！");
+    public ImageNode add(ImageNode imageNode) {
+        if (imageNode.getFeatureId() == null) {
+            System.out.println("fetureId不能为空，添加失败！");
+            return null;
+        } else {
+            if (!isExist(imageNode)) {
+                System.out.println("添加Image成功！");
+                return imageNodeRepository.save(imageNode);
+            } else {
+                System.out.println("此Image节点已存在！添加失败！！");
+                return this.findImageNodeByFeatureId(imageNode.getFeatureId());
+            }
         }
     }
 
@@ -30,10 +35,10 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     public void addList(List<ImageNode> imageNodeList) {
         for (ImageNode i : imageNodeList) {
             boolean isExist = isExist(i);
-            if(isExist==false){
+            if (isExist == false) {
                 imageNodeRepository.save(i);
                 System.out.println("添加成功！");
-            }else {
+            } else {
                 System.out.println("此图片节点已存在！添加失败！");
             }
         }
@@ -52,25 +57,25 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     //UPDATE
 
     @Override
-    public ImageNode updateImageNode(long featureId, String imageId, String imageUrl, String saveTime) {
+    public ImageNode updateImageNode(Long featureId, String imageId, String imageUrl, String saveTime) {
         ImageNode imageNode = imageNodeRepository.updateImageNode(featureId, imageId, imageUrl, saveTime);
         return imageNode;
     }
 
     @Override
-    public ImageNode updateImageIdByFeatureId(long featureId, String imageId) {
+    public ImageNode updateImageIdByFeatureId(Long featureId, String imageId) {
         ImageNode imageNode = imageNodeRepository.updateImageIdByFeatureId(featureId, imageId);
         return imageNode;
     }
 
     @Override
-    public ImageNode updateImageUrlByFeatureId(long featureId, String imageUrl) {
+    public ImageNode updateImageUrlByFeatureId(Long featureId, String imageUrl) {
         ImageNode imageNode = imageNodeRepository.updateImageUrlByFeatureId(featureId, imageUrl);
         return imageNode;
     }
 
     @Override
-    public ImageNode updateSaveTimeByFeatureId(long featureId, String saveTime) {
+    public ImageNode updateSaveTimeByFeatureId(Long featureId, String saveTime) {
         ImageNode imageNode = imageNodeRepository.updateSaveTimeByFeatureId(featureId, saveTime);
         return imageNode;
     }
@@ -83,9 +88,9 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     }
 
     @Override
-    public ImageNode findImageNodeByFeatureId(long featureId) {
+    public ImageNode findImageNodeByFeatureId(Long featureId) {
         ImageNode imageNode = imageNodeRepository.findImageNodeByFeatureId(featureId);
-        if(imageNode==null){
+        if (imageNode == null) {
             System.out.println("该图片节点不存在");
         }
         return imageNode;
@@ -95,7 +100,7 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     public Boolean isExist(ImageNode imageNode) {
         Iterable<ImageNode> imageNodeList = findAll();
         for (ImageNode i : imageNodeList) {
-            if (i.getFeatureId().equals(imageNode.getFeatureId())){
+            if (i.getFeatureId().equals(imageNode.getFeatureId())) {
                 return true;
             }
         }
