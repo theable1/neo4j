@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ImageNodeService {
     //CREATE
-    void add(ImageNode imageNode);
+    ImageNode add(ImageNode imageNode);
 
     void addList(List<ImageNode> imageNodeList);
 
@@ -16,15 +16,15 @@ public interface ImageNodeService {
     void delete(ImageNode imageNode);
 
     //UPDATE
-    ImageNode updateImageNode(long featureId, String imageId, String imageUrl, String saveTime);
+    ImageNode updateImageNode(Long featureId, String imageId, String imageUrl, String saveTime);
 
-    ImageNode updateImageIdByFeatureId(long featureId, String imageId);
+    ImageNode updateImageIdByFeatureId(Long featureId, String imageId);
 
-    ImageNode updateImageUrlByFeatureId(long featureId, String imageUrl);
+    ImageNode updateImageUrlByFeatureId(Long featureId, String imageUrl);
 
-    ImageNode updateSaveTimeByFeatureId(long featureId, String saveTime);
+    ImageNode updateSaveTimeByFeatureId(Long featureId, String saveTime);
     //SEARCH
-    ImageNode findImageNodeByFeatureId(long featureId);
+    ImageNode findImageNodeByFeatureId(Long featureId);
     Iterable<ImageNode> findAll();
     Boolean isExist(ImageNode imageNode);
 }

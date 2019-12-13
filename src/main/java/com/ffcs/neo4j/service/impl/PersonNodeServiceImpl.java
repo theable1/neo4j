@@ -20,13 +20,20 @@ public class PersonNodeServiceImpl implements PersonNodeService {
 
     @Override
     //CREATE
-    public void add(PersonNode personNode) {
-        if (!this.isExist(personNode)) {
-            personNodeRepository.save(personNode);
-            System.out.println("添加Person节点成功！");
+    //
+    public PersonNode add(PersonNode personNode) {
+        if (personNode.getFeatureId() == null) {
+            System.out.println("featureId不为空，添加失败！");
+            return null;
         } else {
-            System.out.println("此节点已存在！添加失败！");
+            if (!isExist(personNode)) {
+                return personNodeRepository.save(personNode);
+            } else {
+                System.out.println("Person节点已存在！添加失败！");
+                return this.findPersonNodeByFeatureId(personNode.getFeatureId());
+            }
         }
+
     }
 
     @Override
@@ -56,30 +63,30 @@ public class PersonNodeServiceImpl implements PersonNodeService {
 
 
     @Override
-    public PersonNode updatePersonNode(long featureId, long newFeatureId, String name) {
+    public PersonNode updatePersonNode(Long featureId, Long newFeatureId, String name) {
         PersonNode personNode = findPersonNodeByFeatureId(newFeatureId);
-        if(personNode == null){
-            personNodeRepository.updatePersonNode(featureId,newFeatureId,name);
-        }else {
+        if (personNode == null) {
+            personNodeRepository.updatePersonNode(featureId, newFeatureId, name);
+        } else {
             System.out.println("此featureID的Person节点已存在，不能修改！");
         }
         return personNode;
     }
 
     @Override
-    public PersonNode updateFeatureIdByFeatureId(long featureId, long newFeatureId) {
+    public PersonNode updateFeatureIdByFeatureId(Long featureId, Long newFeatureId) {
         PersonNode personNode = findPersonNodeByFeatureId(newFeatureId);
-        if(personNode == null){
-            personNodeRepository.updateFeatureIdByFeatureId(featureId,newFeatureId);
-        }else {
+        if (personNode == null) {
+            personNodeRepository.updateFeatureIdByFeatureId(featureId, newFeatureId);
+        } else {
             System.out.println("此featureID的Person节点已存在，不能修改！");
         }
         return personNode;
     }
 
     @Override
-    public PersonNode updateNameByFeatureId(long featureId, String name) {
-        return personNodeRepository.updateNameByFeatureId(featureId,name);
+    public PersonNode updateNameByFeatureId(Long featureId, String name) {
+        return personNodeRepository.updateNameByFeatureId(featureId, name);
     }
 
     //SEARCH
@@ -90,16 +97,16 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     }
 
     @Override
-    public PersonNode findPersonNodeByFeatureId(long featureId) {
+    public PersonNode findPersonNodeByFeatureId(Long featureId) {
         PersonNode personNode = personNodeRepository.findPersonNodeByFeatureId(featureId);
-        if(personNode == null){
+        if (personNode == null) {
             System.out.println("未找到此Person节点！");
         }
         return personNode;
     }
 
     @Override
-    public PersonNode findPersonNodeByImageFeatureId(long featureId) {
+    public PersonNode findPersonNodeByImageFeatureId(Long featureId) {
         ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(featureId);
         if (imageNode != null) {
             PersonNode personNode = personNodeRepository.findPersonNodeByImageNode(featureId);
@@ -114,7 +121,7 @@ public class PersonNodeServiceImpl implements PersonNodeService {
     public boolean isExist(PersonNode personNode) {
         Iterable<PersonNode> personNodeList = personNodeRepository.findAll();
         for (PersonNode p : personNodeList) {
-            if (p.getFeatureId().equals(personNode.getFeatureId()) ) {
+            if (p.getFeatureId().equals(personNode.getFeatureId())) {
                 return true;
             }
         }

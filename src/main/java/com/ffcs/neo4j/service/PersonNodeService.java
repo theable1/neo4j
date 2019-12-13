@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PersonNodeService {
     //CREATE
-    void add(PersonNode personNode);
+    PersonNode add(PersonNode personNode);
 
     void addPersonNodeList(List<PersonNode> personNodeList);
 
@@ -16,16 +16,16 @@ public interface PersonNodeService {
     void deletePerson(PersonNode personNode);
 
     //UPDATE
-    PersonNode updatePersonNode(long featureId, long newFeatureId, String name);
+    PersonNode updatePersonNode(Long featureId, Long newFeatureId, String name);
 
-    PersonNode updateFeatureIdByFeatureId(long featureId, long newFeatureId);
+    PersonNode updateFeatureIdByFeatureId(Long featureId, Long newFeatureId);
 
-    PersonNode updateNameByFeatureId(long featureId, String name);
+    PersonNode updateNameByFeatureId(Long featureId, String name);
 
     //SELECT
     Iterable<PersonNode> findAll();
-    PersonNode findPersonNodeByFeatureId(long featureId);
-    PersonNode findPersonNodeByImageFeatureId(long featureId);
+    PersonNode findPersonNodeByFeatureId(Long featureId);
+    PersonNode findPersonNodeByImageFeatureId(Long featureId);
 
 
     boolean isExist(PersonNode personNode);
