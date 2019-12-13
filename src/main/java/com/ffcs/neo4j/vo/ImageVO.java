@@ -4,14 +4,14 @@ import com.ffcs.neo4j.entity.ImageNode;
 
 public class ImageVO extends ImageNode {
     private Long similarFeatureId;
-    private String OccurDateTime;
+    private String OccurDate;
 
-    public String getOccurDateTime() {
-        return OccurDateTime;
+    public String getOccurDate() {
+        return OccurDate;
     }
 
-    public void setOccurDateTime(String occurDateTime) {
-        OccurDateTime = occurDateTime;
+    public void setOccurDate(String occurDate) {
+        OccurDate = occurDate;
     }
 
     public Long getSimilarFeatureId() {
@@ -26,7 +26,7 @@ public class ImageVO extends ImageNode {
     public String toString() {
         return "ImageVO{" +
                 "similarFeatureId=" + similarFeatureId +
-                ", OccurDateTime='" + OccurDateTime + '\'' +
+                ", OccurDateTime='" + OccurDate + '\'' +
                 "} " + super.toString();
     }
 }

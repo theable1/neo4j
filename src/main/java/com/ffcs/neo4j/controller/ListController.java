@@ -42,7 +42,7 @@ public class ListController {
             PersonNode newPersonNode = personNodeServiceImpl.add(personNode);
             //创建OccurDate节点，和Date关系。
             OccurDateNode occurDateNode = new OccurDateNode();
-            occurDateNode.setDate(imageVO.getOccurDateTime());
+            occurDateNode.setDate(imageVO.getOccurDate());
             OccurDateNode newOccurDateNode = occurDateNodeServiceImpl.add(newPersonNode, occurDateNode);
             //创建Image节点
             ImageNode imageNode = new ImageNode();
@@ -60,10 +60,10 @@ public class ListController {
         } else {
             //有Person节点
             PersonNode personNode = personNodeServiceImpl.findPersonNodeByImageFeatureId(imageVO.getSimilarFeatureId());
-            OccurDateNode occurDateNode = occurDateNodeServiceImpl.getOccurDateNodeByPersonNode(personNode, imageVO.getOccurDateTime());
+            OccurDateNode occurDateNode = occurDateNodeServiceImpl.getOccurDateNodeByPersonNode(personNode, imageVO.getOccurDate());
             if (occurDateNode == null) {
                 //不存在此时间节点，添加时间关系，图片，关系
-                OccurDateNode newOccurDateNode = new OccurDateNode(imageVO.getOccurDateTime());
+                OccurDateNode newOccurDateNode = new OccurDateNode(imageVO.getOccurDate());
                 OccurDateNode occurDateNode1 = occurDateNodeServiceImpl.add(personNode, newOccurDateNode);
                 ImageNode imageNode = new ImageNode(imageVO.getFeatureId(), imageVO.getImageId(), imageVO.getImageUrl(), new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
                 HangRelationship hangRelationship = new HangRelationship(occurDateNode1, imageNode);
@@ -80,6 +80,7 @@ public class ListController {
 
     @RequestMapping("search")
     public Object search(@RequestBody SearchVO searchVO) {
+        System.out.println(searchVO);
         if (searchVO.getSimilarFeatureId() == null) {
             //没有相似图片
             return null;

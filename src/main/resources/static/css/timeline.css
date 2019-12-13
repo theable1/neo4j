@@ -413,6 +413,7 @@ blockquote {
 
 .event_list li {
     background: url('/img/jian.png') 136px -80px no-repeat;
+    margin-bottom: 50px;
 }
 
 .event_list li span {
@@ -421,25 +422,20 @@ blockquote {
     display: block;
     float: left;
     margin-top: 10px;
+    margin-right: 40px;
 }
 
-.event_list li p {
-    width: 680px;
-    margin-left: 24px;
+.event_list li div {
     display: inline-block;
-    padding-left: 10px;
-    background: url('/img/jian.png') -21px 0 no-repeat;
-    line-height: 25px;
-    _float: left;
-}
-
-.event_list li p span {
-    width: 650px;
     text-align: left;
     border-bottom: 2px solid #DDD;
     padding: 10px 15px;
     background: #FFF;
-    margin: 0;
+}
+
+.event_list img {
+    max-width: 200px;
+    max-height: 200px;
 }
 
 .titlelist {

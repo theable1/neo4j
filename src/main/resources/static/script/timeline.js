@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('label').on('click',function () {
+    $('label').on('click', function () {
         $('.event_year>li').removeClass('current');
         $(this).parent('li').addClass('current');
         var year = $(this).attr('for');
@@ -8,9 +8,17 @@ $(document).ready(function () {
     });
 
     var searchVO = {
-        startTime: 2019-11-12,
-        endTime: 2019-12-13
+        startTime: new Date(2019, 11 - 1, 13),
+        endTime: new Date(2019, 12 - 1, 13),
+        similarFeatureId: 5453
     };
+
+    var imageVO = {
+        featureId: 49879,
+        occurDate: "2019-12-13",
+        similarFeatureId: 5453,
+        imageUrl: "http://localhost:8080/img/person.jpg"
+    }
 
     $.ajax({
         type: 'post',
@@ -19,7 +27,56 @@ $(document).ready(function () {
         url: '/neo4j/search',
         data: JSON.stringify(searchVO),
         success: function (data) {
-            console.log(data);
+            var years = [];
+            for (var i = data.length - 1; i >= 0; i--) {
+                var date = data[i].date;
+                var year = date.split("-")[0];
+
+                var flag = true;
+                for (var j = 0; j < years.length; j++) {
+                    if (years[j] == year) {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag) {
+                    years.push(year);
+                }
+            }
+
+            for (var i = 0; i < years.length; i++) {
+                if (i === 0) {
+                    $('.current').append('<label for="' + years[i] + '">' + years[i] + '</label>');
+                } else {
+                    $('.event_year').append('<li><label for="' + years[i] + '">' + years[i] + '</label></li>')
+                }
+                $('.event_list').append(
+                    '<div>' +
+                    '<h3 id="' + years[i] + '">' + years[i] + '</h3>' +
+                    '</div>'
+                );
+            }
+
+            for (var i = data.length - 1; i >= 0; i--) {
+                var images = data[i].imageUrlList;
+                var date = data[i].date;
+                var year = date.split("-")[0];
+                var month = date.split("-")[1];
+                var day = date.split("-")[2];
+
+                var div = $('#' + year).parent();
+                div.append('<li id="' + year + month + day + '"><span>' + month + '月' + day + '日</span></li>');
+
+                var el = $('#' + year + month + day);
+                for (var j = 0; j < images.length; j++) {
+                    el.append(
+                        '<div>' +
+                        '<img src="' + images[j] + '">'+
+                        '</div>'
+                    );
+                }
+            }
+
         },
         error: function () {
         }
