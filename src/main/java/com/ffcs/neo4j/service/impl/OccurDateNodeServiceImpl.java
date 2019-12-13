@@ -5,8 +5,6 @@ import com.ffcs.neo4j.repository.LatestRelationshipRepository;
 import com.ffcs.neo4j.repository.NextRelationshipRepository;
 import com.ffcs.neo4j.repository.OccurDateNodeRepository;
 import com.ffcs.neo4j.repository.PersonNodeRepository;
-import com.ffcs.neo4j.service.LatestRelationshipService;
-import com.ffcs.neo4j.service.NextRelationshipService;
 import com.ffcs.neo4j.service.OccurDateNodeService;
 import com.ffcs.neo4j.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,12 +28,15 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
     PersonNodeRepository personNodeRepository;
 
     @Override
-    public void add(PersonNode person, OccurDateNode occurDateNode) {
+    public OccurDateNode add(PersonNode person, OccurDateNode occurDateNode) {
+        OccurDateNode dateNode = null;
         //防止person节点id为null，无法添加删除相关关系
-        PersonNode personNode = personNodeRepository.findPersonNodeByFeatureId(person.getFeatureId());
+        PersonNode personNode = person;
+        if (person.getId() == null) {
+            personNode = personNodeRepository.findPersonNodeByFeatureId(person.getFeatureId());
+        }
         if (!this.isExist(personNode, occurDateNode)) {
-            //新添日期节点不存在，可添加
-            OccurDateNode dateNode = occurDateNodeRepository.save(occurDateNode);
+            dateNode = occurDateNodeRepository.save(occurDateNode);
             OccurDateNode latestDateNode = this.getLatestOccurDateNodeByPersonNode(personNode);
             List<OccurDateNode> list = this.getOccurDateListByPersonNode(personNode);
             //person节点存在相关的日期节点
@@ -116,8 +117,10 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
                 System.out.println(dateNode + "日期节点为最新日期");
             }
         } else {
-            System.out.println("featureId为" + personNode.getFeatureId() + "的Person节点" + occurDateNode + "时间节点已存在");
+            dateNode = this.getOccurDateNodeByPersonNode(personNode,occurDateNode.getDate());
+            System.out.println(occurDateNode.getDate()+"日期节点已存在！已返回该节点");
         }
+        return dateNode;
     }
 
     @Override
@@ -136,15 +139,12 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
         return latestOccurDateNode;
     }
 
-//    @Override
-//    public OccurDateNode getLatestOccurDateNodeByImageNode(ImageNode imageNode) {
-//        return null;
-//    }
-//
-//    @Override
-//    public OccurDateNode getOccurDateNodeByImageNode(ImageNode imageNode) {
-//        return null;
-//    }
+
+    @Override
+    public OccurDateNode getOccurDateNodeByPersonNode(PersonNode personNode, String date) {
+        OccurDateNode node = occurDateNodeRepository.getOccurDateNodeByPersonNode(personNode.getFeatureId(), date);
+        return node;
+    }
 
     @Override
     public OccurDateNode getNextOccurDateNode(OccurDateNode occurDateNode) {
@@ -162,7 +162,7 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
     public List<OccurDateNode> getOccurDateListByPersonNode(PersonNode personNode) {
         OccurDateNode latestDate = this.getLatestOccurDateNodeByPersonNode(personNode);
         List<OccurDateNode> list = new ArrayList<>();
-        if (latestDate!=null){
+        if (latestDate != null) {
             list.add(latestDate);
             OccurDateNode previousOccurDateNode = this.getPreviousOccurDateNode(latestDate);
             while (previousOccurDateNode != null) {

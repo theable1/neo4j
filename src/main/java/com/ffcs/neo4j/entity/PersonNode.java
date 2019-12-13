@@ -12,7 +12,7 @@ public class PersonNode {
     @GeneratedValue
     private Long id;
     @Property
-    private long featureId;
+    private Long featureId;
     @Property
     private String name;
     @Labels
@@ -36,7 +36,7 @@ public class PersonNode {
         return featureId;
     }
 
-    public void setFeatureId(long featureId) {
+    public void setFeatureId(Long featureId) {
         this.featureId = featureId;
     }
 
