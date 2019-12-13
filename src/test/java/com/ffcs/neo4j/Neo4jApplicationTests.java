@@ -88,7 +88,7 @@ class Neo4jApplicationTests {
 //        occurDateNodeServiceImpl.add(personNode,occurDateNode);
         OccurDateNode occurDateNode = occurDateNodeServiceImpl.getOccurDateNodeByPersonNode(personNode, "2016-12-11");
         System.out.println("occurDateNode:"+occurDateNode);
-        ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(Long.valueOf(5));
+        ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(Long.valueOf(6));
         HangRelationship hangRelationship = new HangRelationship();
         hangRelationship.setOccurDateNode(occurDateNode);
         hangRelationship.setImageNode(imageNode);
@@ -99,9 +99,18 @@ class Neo4jApplicationTests {
     }
     @Test
     void add(){
-        ImageNode imageNode =new ImageNode();
-        imageNode.setFeatureId(Long.valueOf(5));
-        System.out.println(imageNodeServiceImpl.add(imageNode));
+//        ImageNode imageNode =new ImageNode();
+//        imageNode.setFeatureId(Long.valueOf(6));
+//        System.out.println(imageNodeServiceImpl.add(imageNode));
+        PersonNode personNode =new PersonNode();
+        personNode.setFeatureId(Long.valueOf(111));
+        System.out.println(personNodeServiceImpl.add(personNode));
+        OccurDateNode occurDateNode = occurDateNodeServiceImpl.getOccurDateNodeByPersonNode(personNode, "2016-12-11");
+        List<ImageNode> imageNodes = imageNodeServiceImpl.findAllByOccurDate(occurDateNode.getId());
+        for (ImageNode imageNode : imageNodes) {
+            System.out.println(imageNode);
+        }
+
     }
 
 

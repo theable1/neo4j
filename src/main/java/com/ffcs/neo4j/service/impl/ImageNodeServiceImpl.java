@@ -1,11 +1,12 @@
 package com.ffcs.neo4j.service.impl;
 
 import com.ffcs.neo4j.entity.ImageNode;
-import com.ffcs.neo4j.entity.PersonNode;
 import com.ffcs.neo4j.repository.ImageNodeRepository;
 import com.ffcs.neo4j.service.ImageNodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class ImageNodeServiceImpl implements ImageNodeService {
 
     //CREATE
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public ImageNode add(ImageNode imageNode) {
         if (imageNode.getFeatureId() == null) {
             System.out.println("fetureId不能为空，添加失败！");
@@ -32,6 +34,7 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public void addList(List<ImageNode> imageNodeList) {
         for (ImageNode i : imageNodeList) {
             boolean isExist = isExist(i);
@@ -43,38 +46,44 @@ public class ImageNodeServiceImpl implements ImageNodeService {
             }
         }
     }
-    //DELETE
 
+    //DELETE
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public void deleteAll() {
         imageNodeRepository.deleteAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public void delete(ImageNode imageNode) {
         imageNodeRepository.delete(imageNode);
     }
-    //UPDATE
 
+    //UPDATE
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public ImageNode updateImageNode(Long featureId, String imageId, String imageUrl, String saveTime) {
         ImageNode imageNode = imageNodeRepository.updateImageNode(featureId, imageId, imageUrl, saveTime);
         return imageNode;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public ImageNode updateImageIdByFeatureId(Long featureId, String imageId) {
         ImageNode imageNode = imageNodeRepository.updateImageIdByFeatureId(featureId, imageId);
         return imageNode;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public ImageNode updateImageUrlByFeatureId(Long featureId, String imageUrl) {
         ImageNode imageNode = imageNodeRepository.updateImageUrlByFeatureId(featureId, imageUrl);
         return imageNode;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public ImageNode updateSaveTimeByFeatureId(Long featureId, String saveTime) {
         ImageNode imageNode = imageNodeRepository.updateSaveTimeByFeatureId(featureId, saveTime);
         return imageNode;
@@ -82,12 +91,14 @@ public class ImageNodeServiceImpl implements ImageNodeService {
 
     //SEARCH
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public Iterable<ImageNode> findAll() {
         Iterable<ImageNode> imageNodes = imageNodeRepository.findAll();
         return imageNodes;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public ImageNode findImageNodeByFeatureId(Long featureId) {
         ImageNode imageNode = imageNodeRepository.findImageNodeByFeatureId(featureId);
         if (imageNode == null) {
@@ -97,6 +108,7 @@ public class ImageNodeServiceImpl implements ImageNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true,rollbackFor = Throwable.class)
     public Boolean isExist(ImageNode imageNode) {
         Iterable<ImageNode> imageNodeList = findAll();
         for (ImageNode i : imageNodeList) {

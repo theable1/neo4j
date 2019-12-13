@@ -9,6 +9,8 @@ import com.ffcs.neo4j.service.OccurDateNodeService;
 import com.ffcs.neo4j.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -28,6 +30,7 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
     PersonNodeRepository personNodeRepository;
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public OccurDateNode add(PersonNode person, OccurDateNode occurDateNode) {
         OccurDateNode dateNode = null;
         //防止person节点id为null，无法添加删除相关关系
@@ -117,23 +120,26 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
                 System.out.println(dateNode + "日期节点为最新日期");
             }
         } else {
-            dateNode = this.getOccurDateNodeByPersonNode(personNode,occurDateNode.getDate());
-            System.out.println(occurDateNode.getDate()+"日期节点已存在！已返回该节点");
+            dateNode = this.getOccurDateNodeByPersonNode(personNode, occurDateNode.getDate());
+            System.out.println(occurDateNode.getDate() + "日期节点已存在！已返回该节点");
         }
         return dateNode;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public void deleteAll() {
         occurDateNodeRepository.deleteAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public Iterable<OccurDateNode> findAll() {
         return null;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public OccurDateNode getLatestOccurDateNodeByPersonNode(PersonNode personNode) {
         OccurDateNode latestOccurDateNode = occurDateNodeRepository.getLatestOccurDateNodeByPersonNode(personNode.getFeatureId());
         return latestOccurDateNode;
@@ -141,24 +147,28 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
 
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public OccurDateNode getOccurDateNodeByPersonNode(PersonNode personNode, String date) {
         OccurDateNode node = occurDateNodeRepository.getOccurDateNodeByPersonNode(personNode.getFeatureId(), date);
         return node;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public OccurDateNode getNextOccurDateNode(OccurDateNode occurDateNode) {
         OccurDateNode nextOccurDateNode = occurDateNodeRepository.getNextOccurDateNode(occurDateNode.getId());
         return nextOccurDateNode;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public OccurDateNode getPreviousOccurDateNode(OccurDateNode occurDateNode) {
         OccurDateNode previousOccurDateNode = occurDateNodeRepository.getPreviousOccurDateNode(occurDateNode.getId());
         return previousOccurDateNode;
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public List<OccurDateNode> getOccurDateListByPersonNode(PersonNode personNode) {
         OccurDateNode latestDate = this.getLatestOccurDateNodeByPersonNode(personNode);
         List<OccurDateNode> list = new ArrayList<>();
@@ -174,6 +184,7 @@ public class OccurDateNodeServiceImpl implements OccurDateNodeService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true, rollbackFor = Throwable.class)
     public boolean isExist(PersonNode personNode, OccurDateNode occurDateNode) {
         List<OccurDateNode> list = this.getOccurDateListByPersonNode(personNode);
         for (OccurDateNode dateNode : list) {
