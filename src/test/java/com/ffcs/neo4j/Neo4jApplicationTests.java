@@ -1,9 +1,11 @@
 package com.ffcs.neo4j;
 
 
+import com.ffcs.neo4j.entity.HangRelationship;
 import com.ffcs.neo4j.entity.ImageNode;
 import com.ffcs.neo4j.entity.OccurDateNode;
 import com.ffcs.neo4j.entity.PersonNode;
+import com.ffcs.neo4j.service.HangRelationshipService;
 import com.ffcs.neo4j.service.ImageNodeService;
 import com.ffcs.neo4j.service.OccurDateNodeService;
 import com.ffcs.neo4j.service.PersonNodeService;
@@ -23,6 +25,8 @@ class Neo4jApplicationTests {
     OccurDateNodeService occurDateNodeServiceImpl;
     @Autowired
     PersonNodeService personNodeServiceImpl;
+    @Autowired
+    HangRelationshipService hangRelationshipServiceImpl;
 
     @Test
     void contextLoads() {
@@ -35,7 +39,7 @@ class Neo4jApplicationTests {
             Random random = new Random();
             int num = random.nextInt(100);
             ImageNode imageNode = new ImageNode();
-            imageNode.setFeatureId(Long.valueOf(num));
+//            imageNode.setFeatureId(Long.valueOf(num));
             imageNodeList.add(imageNode);
         }
         imageNodeServiceImpl.addList(imageNodeList);
@@ -48,7 +52,7 @@ class Neo4jApplicationTests {
 
     @Test
     void findImageNodeByFeatureId() {
-        ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(55);
+        ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(Long.valueOf(20));
         System.out.println(imageNode);
     }
 
@@ -73,15 +77,31 @@ class Neo4jApplicationTests {
 //        System.out.println(imageNodeServiceImpl.updateImageNode(50, "222", "xxx222.jpg","2019-12-11"));
 //        System.out.println(imageNodeServiceImpl.updateImageIdByFeatureId(50, "333"));
 //        System.out.println(imageNodeServiceImpl.updateImageUrlByFeatureId(50, "333.jpg"));
-        System.out.println(imageNodeServiceImpl.updateSaveTimeByFeatureId(50,"2019-12-12"));
+        System.out.println(imageNodeServiceImpl.updateSaveTimeByFeatureId(Long.valueOf(50),"2019-12-12"));
     }
     @Test
     void test(){
-        OccurDateNode occurDateNode =new OccurDateNode();
-        occurDateNode.setDate("2016-12-11");
-        PersonNode personNode = personNodeServiceImpl.findPersonNodeByFeatureId(111);
-        System.out.println(personNode);
-        occurDateNodeServiceImpl.add(personNode,occurDateNode);
+//        OccurDateNode occurDateNode =new OccurDateNode();
+//        occurDateNode.setDate("2016-12-11");
+        PersonNode personNode = personNodeServiceImpl.findPersonNodeByFeatureId(Long.valueOf(111));
+//        System.out.println(personNode);
+//        occurDateNodeServiceImpl.add(personNode,occurDateNode);
+        OccurDateNode occurDateNode = occurDateNodeServiceImpl.getOccurDateNodeByPersonNode(personNode, "2016-12-11");
+        System.out.println("occurDateNode:"+occurDateNode);
+        ImageNode imageNode = imageNodeServiceImpl.findImageNodeByFeatureId(Long.valueOf(5));
+        HangRelationship hangRelationship = new HangRelationship();
+        hangRelationship.setOccurDateNode(occurDateNode);
+        hangRelationship.setImageNode(imageNode);
+        hangRelationshipServiceImpl.add(hangRelationship);
+//        hangRelationship.setOccurDateNode();
+//        hangRelationshipServiceImpl.add();
+
+    }
+    @Test
+    void add(){
+        ImageNode imageNode =new ImageNode();
+        imageNode.setFeatureId(Long.valueOf(5));
+        System.out.println(imageNodeServiceImpl.add(imageNode));
     }
 
 
