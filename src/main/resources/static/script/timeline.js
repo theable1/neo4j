@@ -1,16 +1,8 @@
 $(document).ready(function () {
-    $('label').on('click', function () {
-        $('.event_year>li').removeClass('current');
-        $(this).parent('li').addClass('current');
-        var year = $(this).attr('for');
-        $('#' + year).parent().prevAll('div').slideUp(800);
-        $('#' + year).parent().slideDown(800).nextAll('div').slideDown(800);
-    });
-
     var searchVO = {
-        startTime: new Date(2019, 11 - 1, 13),
+        startTime: new Date(2017, 11 - 1, 13),
         endTime: new Date(2019, 12 - 1, 13),
-        similarFeatureId: 5453
+        similarFeatureId: 45234
     };
 
     $.ajax({
@@ -37,8 +29,8 @@ $(document).ready(function () {
                 }
             }
 
-            for (var i = 0; i < years.length; i++) {
-                if (i === 0) {
+            for (var i = years.length - 1; i >= 0; i--) {
+                if (i === years.length - 1) {
                     $('.current').append('<label for="' + years[i] + '">' + years[i] + '</label>');
                 } else {
                     $('.event_year').append('<li><label for="' + years[i] + '">' + years[i] + '</label></li>')
@@ -58,21 +50,54 @@ $(document).ready(function () {
                 var day = date.split("-")[2];
 
                 var div = $('#' + year).parent();
-                div.append('<li id="' + year + month + day + '"><span>' + month + '月' + day + '日</span></li>');
+                div.append(
+                    '<li>' +
+                    '<span>' + month + '月' + day + '日</span>' +
+                    '<div>' +
+                    '<div class="swiper-container" style="width: 1080px">' +
+                    '<div class="swiper-wrapper" id="' + year + month + day + '">' +
+                    '</div>' +
+                    // '<div class="swiper-pagination"></div>' +
+                    '<div class="swiper-button-prev"></div>' +
+                    '<div class="swiper-button-next"></div>' +
+                    // '<div class="swiper-scrollbar"></div>'+
+                    '</div>' +
+                    '</div>' +
+                    '</li>'
+                );
 
-                var el = $('#' + year + month + day);
+                var carouselItem = $('#' + year + month + day);
                 for (var j = 0; j < images.length; j++) {
-                    el.append(
-                        '<div>' +
-                        '<img src="' + images[j] + '">'+
+                    carouselItem.append(
+                        '<div class="swiper-slide">' +
+                        '<img src="' + images[j] + '">' +
                         '</div>'
                     );
                 }
             }
-
+            var mySwiper = new Swiper('.swiper-container', {
+                direction: 'horizontal', // 垂直切换选项
+                loop: false, // 循环模式选项
+                slidesPerView: 5,
+                // slidesPerViewFit: true,
+                // 如果需要前进后退按钮
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            })
         },
         error: function () {
         }
+    });
+
+    $('.event_year').on('click', 'label', function () {
+        $('.event_year>li').removeClass('current');
+        $(this).parent('li').addClass('current');
+        var year = $(this).attr('for');
+        console.log(year);
+        $('#' + year).parent().prevAll('div').slideUp(800);
+        $('#' + year).parent().slideDown(800).nextAll('div').slideDown(800);
     });
 
 });
