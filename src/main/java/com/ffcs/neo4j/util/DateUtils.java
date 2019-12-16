@@ -11,10 +11,16 @@ public class DateUtils {
         Date date = simpleDateFormat.parse(str);
         return date;
     }
+    public static String dateToString(Date date){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String str = simpleDateFormat.format(date);
+        return str;
+    }
 
     public static void main(String[] args) throws ParseException {
-        String str = "2019-12-12";
-        Date date = strToDate(str);
-        System.out.println(date);
+//        String str = "2019-12-12";
+//        Date date = strToDate(str);
+//        System.out.println(date);
+        System.out.println(dateToString(new Date()));
     }
 }

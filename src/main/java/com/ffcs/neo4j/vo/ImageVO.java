@@ -2,16 +2,19 @@ package com.ffcs.neo4j.vo;
 
 import com.ffcs.neo4j.entity.ImageNode;
 
-public class ImageVO extends ImageNode {
+public class ImageVO {
+    private Long featureId;
     private Long similarFeatureId;
+    private String imageId;
+    private String imageUrl;
     private String OccurDate;
 
-    public String getOccurDate() {
-        return OccurDate;
+    public Long getFeatureId() {
+        return featureId;
     }
 
-    public void setOccurDate(String occurDate) {
-        OccurDate = occurDate;
+    public void setFeatureId(Long featureId) {
+        this.featureId = featureId;
     }
 
     public Long getSimilarFeatureId() {
@@ -22,11 +25,38 @@ public class ImageVO extends ImageNode {
         this.similarFeatureId = similarFeatureId;
     }
 
+    public String getImageId() {
+        return imageId;
+    }
+
+    public void setImageId(String imageId) {
+        this.imageId = imageId;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getOccurDate() {
+        return OccurDate;
+    }
+
+    public void setOccurDate(String occurDate) {
+        OccurDate = occurDate;
+    }
+
     @Override
     public String toString() {
         return "ImageVO{" +
-                "similarFeatureId=" + similarFeatureId +
-                ", OccurDateTime='" + OccurDate + '\'' +
-                "} " + super.toString();
+                "featureId=" + featureId +
+                ", similarFeatureId=" + similarFeatureId +
+                ", imageId='" + imageId + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", OccurDate='" + OccurDate + '\'' +
+                '}';
     }
 }
