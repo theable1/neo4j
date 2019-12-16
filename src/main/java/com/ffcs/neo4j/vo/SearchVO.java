@@ -2,9 +2,18 @@ package com.ffcs.neo4j.vo;
 
 import java.util.Date;
 
-public class SearchVO extends ImageVO {
+public class SearchVO  {
+    private Long similarFeatureId;
     private Date startTime;
     private Date endTime;
+
+    public Long getSimilarFeatureId() {
+        return similarFeatureId;
+    }
+
+    public void setSimilarFeatureId(Long similarFeatureId) {
+        this.similarFeatureId = similarFeatureId;
+    }
 
     public Date getStartTime() {
         return startTime;
@@ -25,8 +34,9 @@ public class SearchVO extends ImageVO {
     @Override
     public String toString() {
         return "SearchVO{" +
-                "startTime=" + startTime +
+                "similarFeatureId=" + similarFeatureId +
+                ", startTime=" + startTime +
                 ", endTime=" + endTime +
-                "} " + super.toString();
+                '}';
     }
 }
