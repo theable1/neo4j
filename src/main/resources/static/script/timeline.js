@@ -21,7 +21,7 @@ $(document).ready(function () {
                     , prev: '上一个人'
                     , next: '下一个人'
                     , jump: function (obj, first) {
-
+                        console.log(data.length);
                         //obj包含了当前分页的所有参数，比如：
                         var page = obj.curr;//得到当前页
                         var person = data[page - 1];

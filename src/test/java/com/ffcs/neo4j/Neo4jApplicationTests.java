@@ -110,13 +110,17 @@ class Neo4jApplicationTests {
     }
     @Test
     void listAllImagesTest(){
-        List<UploadImageInfo> list = uploadImageInfoServiceImpl.list();
+        List<UploadImageInfo> list = uploadImageInfoServiceImpl.listAll();
         for (UploadImageInfo uploadImageInfo : list) {
             System.out.println(uploadImageInfo);
         }
     }
 
-
+    @Test
+    void listByFeatureId(){
+        UploadImageInfo list = uploadImageInfoServiceImpl.list("1575428479688422000");
+        System.out.println(list);
+    }
 
 
 }

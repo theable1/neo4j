@@ -5,5 +5,6 @@ import com.ffcs.neo4j.entity.UploadImageInfo;
 import java.util.List;
 
 public interface UploadImageInfoService {
-    public List<UploadImageInfo> list() ;
+    public List<UploadImageInfo> listAll() ;
+    public UploadImageInfo list(String featureId);
 }
