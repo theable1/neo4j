@@ -112,6 +112,10 @@ class Neo4jApplicationTests {
         }
 
     }
+    @Test
+    void search(){
+        
+    }
 
 
 
