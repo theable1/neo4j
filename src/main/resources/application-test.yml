@@ -18,7 +18,7 @@ spring:
     time-zone: GMT+8
   data:
     neo4j:
-      uri: bolt://localhost:7687
+      uri: bolt://localhost:7688
       username: neo4j
       password: 123456
   thymeleaf:

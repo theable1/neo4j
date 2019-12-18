@@ -69,38 +69,45 @@ public class TimelineController {
     }
 
     @RequestMapping("search")
-    public Object search(@RequestBody SearchVO searchVO) {
-        System.out.println(searchVO);
-        if (searchVO.getSimilarFeatureId() == null) {
-            //没有相似图片
-            return null;
-        } else {
-            PersonNode personNode = personNodeServiceImpl.findPersonNodeByImageFeatureId(searchVO.getSimilarFeatureId());
+    public Object search() {
+//        System.out.println(searchVO);
+//        if (searchVO.getSimilarFeatureId() == null) {
+//            //没有相似图片
+//            return null;
+//        } else {
+//            PersonNode personNode = personNodeServiceImpl.findPersonNodeByImageFeatureId(searchVO.getSimilarFeatureId());
+//            List<OccurDateNode> occurDateNodeList = occurDateNodeServiceImpl.getOccurDateListByPersonNode(personNode);
+//            List<Map<String, Object>> resultList = new ArrayList<>();
+        List<List<Map<String, Object>>> resultList = new ArrayList<>();
+        //获取所有的personNode
+        Iterable<PersonNode> all = personNodeServiceImpl.findAll();
+        for (PersonNode personNode : all) {
+            List<Map<String, Object>> personInfo = new ArrayList<>();
             List<OccurDateNode> occurDateNodeList = occurDateNodeServiceImpl.getOccurDateListByPersonNode(personNode);
-            List<Map<String, Object>> resultList = new ArrayList<>();
-
             for (OccurDateNode occurDateNode : occurDateNodeList) {
-                Date date = new Date();
-                try {
-                    date = DateUtils.strToDate(occurDateNode.getDate());
-                } catch (ParseException e) {
-                    e.printStackTrace();
+//                Date date = new Date();
+//                try {
+//                    date = DateUtils.strToDate(occurDateNode.getDate());
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                if ((date.before(searchVO.getEndTime()) && date.after(searchVO.getStartTime()))
+//                        || date.equals(searchVO.getStartTime()) || date.equals(searchVO.getEndTime())) {
+                Map<String, Object> map = new HashMap<>();
+                map.put("date", occurDateNode.getDate());
+                List<ImageNode> imageNodeList = imageNodeServiceImpl.findAllByOccurDate(occurDateNode.getId());
+                List<String> imageUrlList = new ArrayList<>();
+                for (ImageNode imageNode : imageNodeList) {
+                    imageUrlList.add(imageNode.getImageUrl());
                 }
-                if ((date.before(searchVO.getEndTime()) && date.after(searchVO.getStartTime()))
-                        || date.equals(searchVO.getStartTime()) || date.equals(searchVO.getEndTime())) {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("date", occurDateNode.getDate());
-                    List<ImageNode> imageNodeList = imageNodeServiceImpl.findAllByOccurDate(occurDateNode.getId());
-                    List<String> imageUrlList = new ArrayList<>();
-                    for (ImageNode imageNode : imageNodeList) {
-                        imageUrlList.add(imageNode.getImageUrl());
-                    }
-                    map.put("imageUrlList", imageUrlList);
-                    resultList.add(map);
-                }
+                map.put("imageUrlList", imageUrlList);
+                personInfo.add(map);
+//                }
             }
-            return resultList;
+            resultList.add(personInfo);
         }
+        return resultList;
+//        }
     }
 
 }
