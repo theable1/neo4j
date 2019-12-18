@@ -1,12 +1,10 @@
 spring:
   data:
     neo4j:
-      uri: bolt://localhost:7687
+      uri: 172.16.6.110:7687
       username: neo4j
-      password: face
-
-  jackson:
-    serialization:
-      #保证@ResponseBody时，Date会自动转化为timeStamp的数值(毫秒数)
-      WRITE_DATES_AS_TIMESTAMPS: true
-    time-zone: GMT+8
+      password: 123456
+    datasource:
+      url: jdbc:mysql://172.16.6.134:3306/vision_bigdata
+      username: root
+      password: vision@bigdata
