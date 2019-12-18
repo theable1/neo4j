@@ -1,8 +1,7 @@
 package com.ffcs.neo4j.vo;
 
-import com.ffcs.neo4j.entity.ImageNode;
 
-public class ImageVO {
+public class Neo4jImageVO {
     private Long featureId;
     private Long similarFeatureId;
     private String imageId;
@@ -51,7 +50,7 @@ public class ImageVO {
 
     @Override
     public String toString() {
-        return "ImageVO{" +
+        return "Neo4jImageVO{" +
                 "featureId=" + featureId +
                 ", similarFeatureId=" + similarFeatureId +
                 ", imageId='" + imageId + '\'' +

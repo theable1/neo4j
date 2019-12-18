@@ -2,7 +2,7 @@ $(document).ready(function () {
     var searchVO = {
         startTime: new Date(2017, 11 - 1, 13),
         endTime: new Date(2019, 12 - 1, 13),
-        similarFeatureId: 45234
+        similarFeatureId: 49879
     };
 
     $.ajax({
@@ -54,8 +54,8 @@ $(document).ready(function () {
                     '<li>' +
                     '<span>' + month + '月' + day + '日</span>' +
                     '<div>' +
-                    '<div class="swiper-container" style="width: 1080px">' +
-                    '<div class="swiper-wrapper" id="' + year + month + day + '">' +
+                    '<div class="swiper-container" style="width: 950px;height: 210px">' +
+                    '<div class="swiper-wrapper" id="' + year + month + day + '" style="height: 208px">' +
                     '</div>' +
                     // '<div class="swiper-pagination"></div>' +
                     '<div class="swiper-button-prev"></div>' +
@@ -95,7 +95,6 @@ $(document).ready(function () {
         $('.event_year>li').removeClass('current');
         $(this).parent('li').addClass('current');
         var year = $(this).attr('for');
-        console.log(year);
         $('#' + year).parent().prevAll('div').slideUp(800);
         $('#' + year).parent().slideDown(800).nextAll('div').slideDown(800);
     });

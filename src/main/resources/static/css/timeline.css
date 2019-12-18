@@ -154,7 +154,7 @@ blockquote {
 
 .page {
     width: 100%;
-    background: #F0F0F0 url(/img/dian2.png) repeat-x;
+    background: #F0F0F0 url(/static/image/dian2.png) repeat-x;
     padding-top: 100px;
     display: table;
     margin: 0 auto;
@@ -250,7 +250,7 @@ blockquote {
 .info h3 {
     width: 300px;
     height: 26px;
-    background: url('/img/ictb.png') no-repeat;
+    background: url('/static/image/ictb.png') no-repeat;
     font-size: 0;
     margin-bottom: 8px;
 }
@@ -285,7 +285,7 @@ blockquote {
     position: absolute;
     right: 10px;
     top: 0;
-    background: url('/img/morelink.gif') no-repeat left center;
+    background: url('/static/image/morelink.gif') no-repeat left center;
     padding-left: 12px;
 }
 
@@ -300,7 +300,7 @@ blockquote {
 
 .info li {
     padding: 3px 0 3px 12px;
-    background: url('/img/dian.png') 2px center no-repeat;
+    background: url('/static/image/dian.png') 2px center no-repeat;
 }
 
 .info li a {
@@ -326,7 +326,7 @@ blockquote {
 }
 
 .box {
-    width: 90%;
+    width: 85%;
     margin: 18px auto 0 auto;
     display: flex;
 }
@@ -386,7 +386,7 @@ blockquote {
 
 .event_year li.current {
     width: 61px;
-    background: #0066ff url('/img/jian.png') 60px 0 no-repeat;
+    background: #0066ff url('/static/image/jian.png') 60px 0 no-repeat;
     color: #FFF;
     text-align: left;
     padding-left: 9px;
@@ -395,7 +395,7 @@ blockquote {
 .event_list {
     width: 850px;
     display: inline-block;
-    background: url('/img/dian3.png') 139px 0 repeat-y;
+    background: url('/static/image/dian3.png') 139px 0 repeat-y;
     margin: 10px 0 20px 0px;
 }
 
@@ -405,14 +405,14 @@ blockquote {
     font-family: Georgia;
     color: #0066ff;
     padding-left: 25px;
-    background: url('/img/jian.png') 0 -45px no-repeat;
+    background: url('/static/image/jian.png') 0 -45px no-repeat;
     height: 38px;
     line-height: 30px;
     font-style: italic;
 }
 
 .event_list li {
-    background: url('/img/jian.png') 136px -80px no-repeat;
+    background: url('/static/image/jian.png') 136px -80px no-repeat;
     margin-bottom: 50px;
     display: flex;
 }
@@ -434,8 +434,15 @@ blockquote {
 }
 
 .event_list img {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 180px;
+    max-height: 180px;
+    margin: auto auto;
+}
+
+.swiper-slide{
+    display: flex;
+    justify-content: center;
+    border: 1px solid #EEEEEE;
 }
 
 .titlelist {
