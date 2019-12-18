@@ -20,11 +20,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.12.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-neo4j</artifactId>
         </dependency>
@@ -49,6 +44,16 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>com.ffcs</groupId>
+            <artifactId>vision-bigdata-message</artifactId>
+            <version>0.0.1-SHAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ffcs</groupId>
+            <artifactId>vision-bigdata-message-mysql</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jdbc</artifactId>
         </dependency>
@@ -56,6 +61,10 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 

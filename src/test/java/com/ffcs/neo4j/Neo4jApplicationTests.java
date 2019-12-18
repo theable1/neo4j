@@ -98,7 +98,7 @@ class Neo4jApplicationTests {
 
     }
     @Test
-    void add(){
+    void list(){
 //        ImageNode imageNode =new ImageNode();
 //        imageNode.setFeatureId(Long.valueOf(6));
 //        System.out.println(imageNodeServiceImpl.add(imageNode));

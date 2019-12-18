@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableNeo4jRepositories(basePackages = "com.ffcs.neo4j.repository")
-@EnableTransactionManagement
+//@EnableTransactionManagement
 public class Neo4jApplication {
 
     public static void main(String[] args) {
