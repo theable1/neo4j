@@ -1,14 +1,8 @@
 package com.ffcs.neo4j;
 
 
-import com.ffcs.neo4j.entity.HangRelationship;
-import com.ffcs.neo4j.entity.ImageNode;
-import com.ffcs.neo4j.entity.OccurDateNode;
-import com.ffcs.neo4j.entity.PersonNode;
-import com.ffcs.neo4j.service.HangRelationshipService;
-import com.ffcs.neo4j.service.ImageNodeService;
-import com.ffcs.neo4j.service.OccurDateNodeService;
-import com.ffcs.neo4j.service.PersonNodeService;
+import com.ffcs.neo4j.entity.*;
+import com.ffcs.neo4j.service.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +21,8 @@ class Neo4jApplicationTests {
     PersonNodeService personNodeServiceImpl;
     @Autowired
     HangRelationshipService hangRelationshipServiceImpl;
+    @Autowired
+    UploadImageInfoService uploadImageInfoServiceImpl;
 
     @Test
     void contextLoads() {
@@ -113,8 +109,11 @@ class Neo4jApplicationTests {
 
     }
     @Test
-    void search(){
-        
+    void listAllImagesTest(){
+        List<UploadImageInfo> list = uploadImageInfoServiceImpl.list();
+        for (UploadImageInfo uploadImageInfo : list) {
+            System.out.println(uploadImageInfo);
+        }
     }
 
 

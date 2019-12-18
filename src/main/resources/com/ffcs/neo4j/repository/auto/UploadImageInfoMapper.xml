@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ffcs.neo4j.repository.auto.UploadImageInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ffcs.neo4j.entity.UploadImageInfo">
+    <id column="image_id" jdbcType="VARCHAR" property="imageId" />
+    <result column="image_absolute_path" jdbcType="VARCHAR" property="imageAbsolutePath" />
+    <result column="image_show_path" jdbcType="VARCHAR" property="imageShowPath" />
+    <result column="faiss_id" jdbcType="VARCHAR" property="faissId" />
+    <result column="faiss_group_name" jdbcType="VARCHAR" property="faissGroupName" />
+    <result column="faiss_feature_id" jdbcType="VARCHAR" property="faissFeatureId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="uploader_id" jdbcType="VARCHAR" property="uploaderId" />
+    <result column="image_position" jdbcType="VARCHAR" property="imagePosition" />
+    <result column="image_time" jdbcType="TIMESTAMP" property="imageTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    image_id, image_absolute_path, image_show_path, faiss_id, faiss_group_name, faiss_feature_id, 
+    create_time, uploader_id, image_position, image_time
+  </sql>
+  <select id="selectByExample" parameterType="com.ffcs.neo4j.entity.UploadImageInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from upload_image_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from upload_image_info
+    where image_id = #{imageId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from upload_image_info
+    where image_id = #{imageId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ffcs.neo4j.entity.UploadImageInfoExample">
+    delete from upload_image_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ffcs.neo4j.entity.UploadImageInfo">
+    insert into upload_image_info (image_id, image_absolute_path, image_show_path, 
+      faiss_id, faiss_group_name, faiss_feature_id, 
+      create_time, uploader_id, image_position, 
+      image_time)
+    values (#{imageId,jdbcType=VARCHAR}, #{imageAbsolutePath,jdbcType=VARCHAR}, #{imageShowPath,jdbcType=VARCHAR}, 
+      #{faissId,jdbcType=VARCHAR}, #{faissGroupName,jdbcType=VARCHAR}, #{faissFeatureId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{uploaderId,jdbcType=VARCHAR}, #{imagePosition,jdbcType=VARCHAR}, 
+      #{imageTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ffcs.neo4j.entity.UploadImageInfo">
+    insert into upload_image_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="imageAbsolutePath != null">
+        image_absolute_path,
+      </if>
+      <if test="imageShowPath != null">
+        image_show_path,
+      </if>
+      <if test="faissId != null">
+        faiss_id,
+      </if>
+      <if test="faissGroupName != null">
+        faiss_group_name,
+      </if>
+      <if test="faissFeatureId != null">
+        faiss_feature_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="uploaderId != null">
+        uploader_id,
+      </if>
+      <if test="imagePosition != null">
+        image_position,
+      </if>
+      <if test="imageTime != null">
+        image_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="imageId != null">
+        #{imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="imageAbsolutePath != null">
+        #{imageAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageShowPath != null">
+        #{imageShowPath,jdbcType=VARCHAR},
+      </if>
+      <if test="faissId != null">
+        #{faissId,jdbcType=VARCHAR},
+      </if>
+      <if test="faissGroupName != null">
+        #{faissGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="faissFeatureId != null">
+        #{faissFeatureId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploaderId != null">
+        #{uploaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePosition != null">
+        #{imagePosition,jdbcType=VARCHAR},
+      </if>
+      <if test="imageTime != null">
+        #{imageTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ffcs.neo4j.entity.UploadImageInfoExample" resultType="java.lang.Long">
+    select count(*) from upload_image_info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update upload_image_info
+    <set>
+      <if test="record.imageId != null">
+        image_id = #{record.imageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageAbsolutePath != null">
+        image_absolute_path = #{record.imageAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageShowPath != null">
+        image_show_path = #{record.imageShowPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faissId != null">
+        faiss_id = #{record.faissId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faissGroupName != null">
+        faiss_group_name = #{record.faissGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faissFeatureId != null">
+        faiss_feature_id = #{record.faissFeatureId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uploaderId != null">
+        uploader_id = #{record.uploaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imagePosition != null">
+        image_position = #{record.imagePosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imageTime != null">
+        image_time = #{record.imageTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update upload_image_info
+    set image_id = #{record.imageId,jdbcType=VARCHAR},
+      image_absolute_path = #{record.imageAbsolutePath,jdbcType=VARCHAR},
+      image_show_path = #{record.imageShowPath,jdbcType=VARCHAR},
+      faiss_id = #{record.faissId,jdbcType=VARCHAR},
+      faiss_group_name = #{record.faissGroupName,jdbcType=VARCHAR},
+      faiss_feature_id = #{record.faissFeatureId,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      uploader_id = #{record.uploaderId,jdbcType=VARCHAR},
+      image_position = #{record.imagePosition,jdbcType=VARCHAR},
+      image_time = #{record.imageTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ffcs.neo4j.entity.UploadImageInfo">
+    update upload_image_info
+    <set>
+      <if test="imageAbsolutePath != null">
+        image_absolute_path = #{imageAbsolutePath,jdbcType=VARCHAR},
+      </if>
+      <if test="imageShowPath != null">
+        image_show_path = #{imageShowPath,jdbcType=VARCHAR},
+      </if>
+      <if test="faissId != null">
+        faiss_id = #{faissId,jdbcType=VARCHAR},
+      </if>
+      <if test="faissGroupName != null">
+        faiss_group_name = #{faissGroupName,jdbcType=VARCHAR},
+      </if>
+      <if test="faissFeatureId != null">
+        faiss_feature_id = #{faissFeatureId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uploaderId != null">
+        uploader_id = #{uploaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="imagePosition != null">
+        image_position = #{imagePosition,jdbcType=VARCHAR},
+      </if>
+      <if test="imageTime != null">
+        image_time = #{imageTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where image_id = #{imageId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ffcs.neo4j.entity.UploadImageInfo">
+    update upload_image_info
+    set image_absolute_path = #{imageAbsolutePath,jdbcType=VARCHAR},
+      image_show_path = #{imageShowPath,jdbcType=VARCHAR},
+      faiss_id = #{faissId,jdbcType=VARCHAR},
+      faiss_group_name = #{faissGroupName,jdbcType=VARCHAR},
+      faiss_feature_id = #{faissFeatureId,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      uploader_id = #{uploaderId,jdbcType=VARCHAR},
+      image_position = #{imagePosition,jdbcType=VARCHAR},
+      image_time = #{imageTime,jdbcType=TIMESTAMP}
+    where image_id = #{imageId,jdbcType=VARCHAR}
+  </update>
+</mapper>
